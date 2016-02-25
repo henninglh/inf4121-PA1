@@ -14,10 +14,39 @@
 \section{Requirement 1 - Brief analysis}
 
 \subsection{Brief description}
-
+This program is a simulation of the popular game Minesweeper. In this version of
+Minesweeper, the player is presented with a map of coordinates with
+questionmarks. Under each questionmark, there is either a number representing
+how many mines that are in the vicinity of this particular point on the map, or,
+a mine. The player is prompted for a set of coordinates, which should correlate
+to a questionmark on the map that the player does not think has a mine beneath
+it. The game goes on for as long as the player does not hit a questionmark with
+a mine beneath. The game ends when the player has identified all of the
+questionmarks without a mine, or if the player hits a questionmark with a mine.
 \subsection{Analysis}
+\subsubsection{Defects}
+This program consists of three files.
 
+\begin{itemize}
+    \item Minesweeper.java - The main class of this program. Calls on the two other parts, MineField and Ranking.
+    \item MineField.java - Represents the map of the minefield
+    \item Ranking.java - Handles the highscores of the players playing this game
+\end{itemize}
+\subsubsubsection{Minesweeper.java}
+This main class on the program has the responsibility for the control flow of the program. When should the minefield be
+called to make a judgement about whether the game is still going or ended? When should the ranking be upon to calculate
+the score of the player and show the highscore? It taks input from the terminal and compares it to certain keywords. If
+the input from the player does not match the input criteria, the game just prompts for new input.
+
+The testable parts in this class consist of handling the input from the user and that the right action is taken
+accordingly. For example, if the user gives "top" as input to the program, the ranking class should be called to show
+the ranking of the players. And if restart is called, you would expect the program to restart your session.
+\subsubsubsection{MineField.java}
+
+\subsubsubsection{Ranking.java}
 \subsection{Non-functional tests}
+In our opinion, the Minesweeper program does not display the need for non-functional tests. It is Java, so it to a high
+degree platform independent. It is Java, so it to a high degree platform independent. CONTINUE HERE HENNING
 
 \subsection{Test cases}
 
