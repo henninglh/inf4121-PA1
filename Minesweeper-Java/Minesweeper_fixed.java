@@ -5,6 +5,8 @@ public class Minesweeper_fixed {
 	static int GAME_EXIT = 1;
 	static int GAME_CONTINUE = 2;
 	static int GAME_RESTART = 3;
+	static int GAME_LOST = 4;
+	static int GAME_WON = 5;
 
 	private static MineField field;
 	private static Ranking rank;	
@@ -41,20 +43,16 @@ public class Minesweeper_fixed {
 	private static int checkInput(String input, int result) {
 		if (input.equals("top")) rank.show();
 		else if (input.equals("restart")) {
-			rank.recordName(result);
-			return GAME_RESTART;
-			//return restart(result);
+			return endRound(result, GAME_RESTART);
 		}
 		else if (input.equals("exit")) {
-			rank.recordName(result);
-			return GAME_EXIT;
-			//return exit(result);
+			return endRound(result, GAME_EXIT);
 		}
 		else if (field.legalMoveString(input)) { 
 			return legalMove(result);
 		}
 		else if (field.getBoom()) {
-			return doBoom(result);
+			return endRound(result, GAME_LOST);
 		}
 
 		return GAME_CONTINUE;
@@ -73,27 +71,30 @@ public class Minesweeper_fixed {
 	}
 	 */
 
-	/* Explode a bomb, meaning game is lost. Return and give message to user */
-	private static int doBoom(int result) {
-		System.out.println("\nBooooooooooooooooooooooooooooom!You stepped on a mine!You survived " + result + " turns");
-		rank.recordName(result);
-		return GAME_RESTART;
-	}
-
 	/* Do a legal move */
 	private static int legalMove (int result) {
 		result++;
 		if(result == 35) {
-			return winGame(result);
+			return endRound(result, GAME_WON);
 		}
 		return GAME_CONTINUE;
 	}
 
-	/* Game is won, return and give message to user */
+	/* Game is won, return and give message to user 
 	private static int winGame(int result) {
 		System.out.println("Congratulations you WON the game!");
 		rank.recordName(result);
 		return GAME_RESTART;
+	} */
+
+	public static int endRound(int result, int code) {
+		if(code == GAME_LOST) {
+			System.out.println("\nBooooooooooooooooooooooooooooom!You stepped on a mine!You survived " + result + " turns");
+		} else if (code == GAME_WON) {
+			System.out.println("Congratulations you WON the game!");
+		}
+		rank.recordName(result);
+		return code;
 	}
 
 	/* Print info strings, with instructions for the game */
