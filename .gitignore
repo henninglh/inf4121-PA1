@@ -49,6 +49,9 @@ acs-*.bib
 *.snm
 *.vrb
 
+# Java class files
+*.class
+
 # cprotect
 *.cpt
 
@@ -83,6 +86,9 @@ acs-*.bib
 
 # hyperref
 *.brf
+
+# IDE
+*.idea
 
 # knitr
 *-concordance.tex
@@ -153,6 +159,9 @@ pythontex-files-*/
 
 # xypic precompiled matrices
 *.xyc
+
+# XML
+*.xml
 
 # WinEdt
 *.bak
