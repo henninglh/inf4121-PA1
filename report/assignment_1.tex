@@ -41,12 +41,50 @@ the input from the player does not match the input criteria, the game just promp
 The testable parts in this class consist of handling the input from the user and that the right action is taken
 accordingly. For example, if the user gives "top" as input to the program, the ranking class should be called to show
 the ranking of the players. And if restart is called, you would expect the program to restart your session.
+
 \subsubsection{MineField.java}
 
 \subsubsection{Ranking.java}
+
 \subsection{Non-functional tests}
-In our opinion, the Minesweeper program does not display the need for non-functional tests. It is Java, so it to a high
-degree platform independent. It is Java, so it to a high degree platform independent. CONTINUE HERE HENNING
+Non-functional tests should always be tested. Though, this code looks like it was submitted in some introduction course
+in Java programming. If we look on this as a mandatory assignment in such a course, it should run on every machine at
+UiO installed with Java. If this were to be a huge game developed by a real company with the goal of making a
+multiplayer minesweeper with a regional highscore for each country and so on. The amount of non-functional requirements
+will increase. 
+
+We have decided to measure the non-functional requirements to meet what we can extract from the Minesweeper game on
+Windows 10.
+
+\subsubsection{Performance, load and stress}
+The program should not strain the computer to the point where Minesweeper prevents normal execution of other programs. 
+
+\subsubsection{Reliability}
+If the program crashes, it does not save the state, so it is not recoverable after a crash. Though, the original game of
+Minesweeper does not do this either.
+
+\subsubsection{Usability}
+Playing the game requires the player to have previous knowledge of coordination systems. The instructions on how to play
+the game is lacking to some degree. It is a single line that instructs the user to give coordinates as input and to not
+step on a mine. This is forgiving to some degree, as most of us have previous experience with the Minesweeper game.
+
+\subsubsection{Efficiency}
+The program operates instantaneously both when it comes to asking for input and calculating the highscore. Also, the
+program as a whole does not utilize anything more than it needs to.
+
+\subsubsection{Maintainability} % A bit functional??
+If changes is to be made to this system, the programmer has to know the Java programming language. If not, it as to be
+written from scratch in order for a change to be made. It is not imported or implemented a test library like JUnit for
+testing the different parts of the program, so it is not easy to just implement new tests without interrupting the data
+flow of the program.
+
+\subsubsection{Portability}
+The only requirement for the program to be run is Java. The program can be run automatically with an IDE like IntelliJ
+or Eclipse. Without an IDE, you have to have some knowledge about the Java Platform. An alternative to just use the Java
+compiler and platform is to use a software project management system like Maven, Ant or Make. They will shorten and ease
+up the process of defining goals like compilation, testing and running the system standalone or for example with an
+application server like Tomcat or Jetty
+
 
 \subsection{Test cases}
 
