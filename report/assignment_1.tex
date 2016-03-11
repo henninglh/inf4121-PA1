@@ -6,6 +6,9 @@
 \usepackage{listings}
 \setlength{\parskip}{1em}
 \setlength{\parindent}{0em}
+\usepackage{caption}
+\usepackage{subcaption}
+
 
 \urlstyle{sf}
 \usepackage{tikz,babel,textcomp,csquotes,pgf-umlsd,varioref,graphicx, float}
@@ -169,6 +172,9 @@ The max complexity on the whole project is at 12, which is pretty high, and on o
 
 \section{Requirement 3 - Code improvement}
 \subsection{Identification of metrics}
+For the whole project the two metrics that needs work are comments, average
+depth and max complexity. 
+
 For the file Minesweeper.java the two metrics that are outside of ... are 
 'Method/class' and 'Avg. Depth'. These two metrics are pretty good correlation.
 By moving code in nested if-statements or that in some way have a high depth 
@@ -215,19 +221,18 @@ will return the code from checkInput unless the code is GAME\_CONTINUE.
 Lastly inserting simple documentation for every method will suffice for keeping
 the '\% comments' inside recommended values.
 
-
-
 \subsection{Results from changes}
-\begin{figure}
-	\caption{Kiviat graph of Minesweeper.java before changes}
-	\includegraphics[height=8cm]{kiviat_minesweeper_before}
-	\label{minesweeper_before}
-\end{figure}
-
-\begin{figure}
-	\caption{Kiviat graph of Minesweeper.java after changes}
-	\includegraphics[height=8cm]{kiviat_minesweeper_after}
-	\label{minesweeper_after}
+\begin{figure}[h]
+	\begin{subfigure}[b]{0.5\textwidth}
+		\caption{Kiviat graph of Minesweeper.java before changes}
+		\includegraphics[width=\textwidth]{kiviat_minesweeper_before}
+		\label{minesweeper_before}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.5\textwidth}
+		\caption{Kiviat graph of Minesweeper.java after changes}
+		\includegraphics[width=\textwidth]{kiviat_minesweeper_after}
+		\label{minesweeper_after}
+	\end{subfigure}
 \end{figure}
 
 Figure \ref{minesweeper_after} Shows that the kiviat metrics are all inside 
@@ -240,6 +245,25 @@ removal of the redundant indentations. Also the avg complexity and avg
 statements.
 per method has been lowered in affect to the introduced 'helper' methods. 
 
-\subsection{Final remarks}
+\begin{figure}[h]
+	\begin{subfigure}[b]{0.5\textwidth}
+		\caption{Kiviat graph of the whole project before changes}
+		\includegraphics[width=\textwidth]{kiviat_project_baseline}
+		\label{project_before}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.5\textwidth}
+		\caption{Kiviat graph of the project after changes}
+		\includegraphics[width=\textwidth]{kiviat_project_after}
+		\label{project_after}
+	\end{subfigure}
+\end{figure}
 
+
+\subsection{Final remarks}
+It was not so easy as it seemed to maintain the code. Almost all the values
+depend on each other in some way, and by decreasing the depth by creating more
+helper methods, the complexity and average complexity decreased naturally. You
+could not just improve one metric without thinking about the other. But with
+some planning and given there are not too many metrics to keep in mind, the
+improvement went rather smoothly. 
 \end{document}
