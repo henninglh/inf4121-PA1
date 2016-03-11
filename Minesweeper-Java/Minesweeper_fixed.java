@@ -2,14 +2,17 @@ import java.util.Scanner;
 
 public class Minesweeper_fixed {
 
-	static int GAME_EXIT = 1;
-	static int GAME_CONTINUE = 2;
-	static int GAME_RESTART = 3;
-	static int GAME_LOST = 4;
-	static int GAME_WON = 5;
+	static final int GAME_EXIT = 1;
+	static final int GAME_CONTINUE = 2;
+	static final int GAME_RESTART = 3;
+	static final int GAME_LOST = 4;
+	static final int GAME_WON = 5;
 
 	private static MineField field;
 	private static Ranking rank;	
+
+	/* Print rankings, print gameinfo and continue the game until
+	 * user inputs to exit the game */
 	public static void main(String[] args) {
 		rank=new Ranking();
 		mainMessage();
@@ -17,6 +20,10 @@ public class Minesweeper_fixed {
 		System.out.println("\nThank you for playing :) Have a nice day!");
 	}	
 
+	/* Contiune the game. Take input from user, and call a method to 
+	 * parse the input. As long as the return for the action is not
+	 * exit or restart, contine to take inputs.
+	 */
 	private static int gameCountinue() {
 		field = new MineField();
 		int result = 0;
@@ -54,22 +61,8 @@ public class Minesweeper_fixed {
 		else if (field.getBoom()) {
 			return endRound(result, GAME_LOST);
 		}
-
 		return GAME_CONTINUE;
 	}
-
-	/* Restart game 
-	private static int restart(int result) {
-		rank.recordName(result);
-		return GAME_RESTART;
-	} */
-
-	/* Exit gamme 
-	private static int exit(int result) { 
-		rank.recordName(result);
-		return GAME_EXIT;
-	}
-	 */
 
 	/* Do a legal move */
 	private static int legalMove (int result) {
@@ -80,13 +73,10 @@ public class Minesweeper_fixed {
 		return GAME_CONTINUE;
 	}
 
-	/* Game is won, return and give message to user 
-	private static int winGame(int result) {
-		System.out.println("Congratulations you WON the game!");
-		rank.recordName(result);
-		return GAME_RESTART;
-	} */
-
+	/* Method to end the round 
+	 * Take in results to write to write as a record,
+	 * and code to return the game state 
+	 */
 	public static int endRound(int result, int code) {
 		if(code == GAME_LOST) {
 			System.out.println("\nBooooooooooooooooooooooooooooom!You stepped on a mine!You survived " + result + " turns");
@@ -96,7 +86,7 @@ public class Minesweeper_fixed {
 		rank.recordName(result);
 		return code;
 	}
-
+	
 	/* Print info strings, with instructions for the game */
 	private static void mainMessage(){
 		System.out.println("Welcome to Minesweeper!");

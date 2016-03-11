@@ -47,19 +47,7 @@ public class Minesweeper {
 				}
 				continue;
 			}
-//			if(input.equals("exit")){
-//				rank.recordName(result);
-//				return false;
-//			}
-//			if(field.legalMoveString(input)){
-//				result++;
-//				if(result==35){
-//					System.out.println("Congratulations you WON the game!");
-//					rank.recordName(result);
-//					return true;
-//				}
-//				continue;
-//			}
+
 			else if (field.getBoom()) {
 				System.out.println("\nBooooooooooooooooooooooooooooom!You stepped on a mine!You survived " + result + " turns");
 				rank.recordName(result);
