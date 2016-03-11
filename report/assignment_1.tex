@@ -4,6 +4,7 @@
 
 \usepackage[a4paper]{geometry}
 \usepackage{listings}
+
 \setlength{\parskip}{1em}
 \setlength{\parindent}{0em}
 \usepackage{caption}
@@ -14,6 +15,7 @@
 \usepackage{tikz,babel,textcomp,csquotes,pgf-umlsd,varioref,graphicx, float}
 \usepackage{array}
 \usepackage[font={small,it,sf}]{caption}
+\usepackage{longtable}
 \usetikzlibrary{arrows, shadows}
 \title{Project 1}        %% ... or whatever
          %% ... if any
@@ -152,46 +154,62 @@ handling of the system.
 \subsection{Metrics at project level}
 \includegraphics[height=8cm]{metric_summary}
 \includegraphics[height=8cm]{kiviat_diagram_baseline}
-\begin{itemize}
-\item What metrics do you spot for the whole project in the window Metrics Summary for Checkpoint? Write a brief description of the metrics. Try to explain their values (below what is expected, as expected or above the expected level). What metrics do you think need to change?\\
-\item Which is the biggest file you have in your project by the number of lines of code? \\
-MineField.java
-\item Which is the file with most branches in your project?\\
-MineField.java
-\item Which is the file with most complex code? What metric did you choose to answer to this question?\\
-MineField.java
-\end{itemize}
+We used SourceMonitor to check which file was the biggest in our project by the number of lines in code. At the same time we needed to find the file with most branches and most complex code. On all three occurrences, it was MineField.java that had the most complex code, most lines and most branches. We could see from the kiviat graph that because of the depth at 6, the max complexity at 12 and average depth at 2.7, that the code from MineField is the most complex code of all of them. 
 
- 
-
-Files: This project that we are testing and analyzing has a total of three files\\\\
-Lines: There are in total 325 lines of code throughout the three files. \\
-Statements: Statements are terminated with a semicolon character in Java. Those lines of code are not the only ones that are statements, but branches suchs as if, for and while are also counted as statements. At the same time, exception control statemens try, catch and finally are also counted as statements, and throw statements. Our project that we chose has in total 162 statements. \\\\
-Percent Branch statements: There are multiple statements that are regarded as branch statements. These are; if, else, for do, while, break, continue, switch, case and default, but we also count exception block statements such as try, catch, finally and throw as branch statements. The percent branch statements is how much percent of all the statements are branch statements in our project. This number in our project is 10.5\% which means that out of 162 statements, 16 of those are branch statements\\\\
-Method call statements: All calls are counted, both in statements and in logical expressions. Our porject has 92 method call statements.\\\\
-Percent lines with comments: Off all the lines throughout the three files, the percentage that are comments is 4\%. Which means that from 326 lines of code, 13 lines are comments. This isn't that much really, but if the code is easy to read and understand, that it does not really matter. If the code is unreadable with obscure variable names and complex logic, then it needs more comments. \\\\
-Classes and Interfaces: SourceMonitor checks for the name ``class <class name>'' or ``interface <interface name>'' and extracts the class names. Both interfaces and classes are counted together. Our project has only three classes and no interfaces. \\\\ 
-Methods per class: Total method count divided by the total class count. In our project this is 5.33 methods throughout three files. \\\\
-Average Statements per Method: Total number of statements found inside of methods divided by methods found in the file. 10.38 \\\\ 
-Name of Most complex methods: The method that is the most complex one; MineField.drawChar()\\\\
-Maximum Complexity: 12
-Maximum Block Depth: Start of each file is level zero, each indent is one depth. The maximum depth here is 7. \\\\
-Average Block Depth: Weighted average of the block depth of all statements of the project. 2.73 is the average block depth in our project. \\\\
-Average Complexity: Measure of the overall complexity for each method in a file or checkpoint. For our whole porject, the average complexity is 3.88\\\\
-Most complext methods (complexity, statements, max depth, calls): Shows the most complex methods of the whole project, and shows the different numbers for complexity, statements, max depth and calls that it does. \\\\
-Statements on each block depth: This shows how many statemetents each block depth has, and we can see from our Metrics Summary picture that there are 63 statements on block depth 2, then comes block depth 3 with 56 statements in total. \\\\
-
-
-
+\begin{longtable}[H]{| m{1in} |  m{2in} | m{2in} |}
+       \hline
+       \textbf{Metric} & \textbf{Description} & \textbf{Explanation}\\
+       \hline
+        Files & How many files the project has in total & Our project has three files\\
+       \hline
+       Lines & Total lines of code throughout the project & There are a total of 325 lines in our project\\
+       \hline
+       Statements & Statements are lines that are terminated with a semicolon character. Branches such as if, for, while are also counted as statements, so are control statements try, catch, finally and throw. & 198 statements\\
+       \hline
+       Percent Branch Statements & The percent branch statements is how much percent of all the statemtns are branch statements in our project. & From the total of 198 statements, are only 27.3\% of those branch statements\\
+       \hline
+       Method call statements & All calls are counted, both in statements and in logical expressions. & There are 64 method call statements\\
+       \hline
+       Percent lines with comments & Off all the lines throughout the project, how many of those lines are comments. &  Only 4\% of the lines are comments. This is a little low, since we would like to have them between 8-20 percent. If the code is complex, then it needs comments, while easy to understand code does not necessarily need comments. This needs to change when we refactor \\
+       \hline
+       Classes and Interfaces & SourceMonitor checks for the name ``class <class name>'' or ``interface <interface name>'' and extracts the calss names. Both interfaces and classes are counted together. & Three classes and no interfaces \\
+       \hline
+       Methods per class & Total method count divided by the total class count & 5.33 methods per class, and it is expected to be between 4-16, which it is. Does not really need to change that much, but a few more methods would benefit the whole project. It's important that a method does not have too many statements. Better with methods with few statements, than the other way\\
+       \hline
+       Average Statements per Method & Total number of statements found inside of methods divided by methods found in the file. & Average statements per methods is 10.38, which means to us that it is on the border of going over exptected. We should refactor the code in a way that each method has less statements, but there are more methods \\
+       \hline
+       Name of most complex methods & The method that is the most complex one & MineField.drawChar()\\
+       \hline
+       Maximum Complexity & Count of the number of basic decision in a function assigning 1 point to each of the following: the function, each if, while, switch, case, for statements and each || or \&\& within a conditional & Our project has a maximum complexity of 12, which is too high and over exptected. We would like to have it down to between 2-8. \\
+       \hline
+       Maximum Block Depth & Start of each file is level zero, each indent is one depth & Our project has a maximum block depth at 7, which is over what we would like to have. It would be better if it was at a maximum of 3 depths, and need to change a few of the for loops and if statements \\
+       \hline
+       Average Block Depth & Weighted average of the block depth of all statements of the project & The average depth is 2.73, we would like to ahve it at 2.2 at the highest. When we change the maximum block depth part, then this one will also change accordingly \\
+       \hline
+       Average Complexity & Measure of the overall complexity for each method in a file or checkpoint. & Average complexity is 3.88. Here we need to change how many statements and conditionals we use, the less the better. We would like to have it at most at 3.\\
+       \hline
+       Most complex methods & Shows the most complex methods of the whole project, and shows the different numbers for complexity, statements, max depth and calls that it does. & MineField.drawChar(), MineSweeper.gameContinue() and Ranking.sort() are the msot complex methods in three classes. We are going to change the MineSweeper class, where complex, stmts, dept and calls are 8,25,7,0. We are going to change that to a much lower number on each, hopefully 3 in depth, which is the most important one\\ 
+       \hline
+       Statements on each block depth & Shows how many statements each block depth has & - We see from the summary that there are too many statements from depth 4 to 7. We are going to get rid of most of them, and have the most statements on depth 2, at most 3. \\
+       \hline
+\end{longtable}
 \subsection{Metrics at file level}
 \includegraphics[height=8cm]{kiviat_diagram_minesweeper}
-We decided to check the metrict of minesweeper.java file. Here we can see that the average complexity is at about 3.67, while the whole project is at 3.88. We can conclude from this that they are at the same point on the metric scale, but it is still a little high. What we would like to have is at about 2 on the scale. \\\\
-Average depth is the same on both the whole project and in the specified file. The depth is too high and we should refactor it so that it goes down to about 1-2.2. \\\\
-Max depth is at about 7, which we find is too high and we want refactor it to about 2-4, it is the same for the whole project. If the max depth starts to be higher than 4, then the complexity of the program goes up, and that becomes a problem when you want to debug or add more functionality to the code. \\\\
-The whole project has 4\% comments in total from all the lines, while minesweeper.java is at about 15\%. This is ideal for the specific file, but not with the whole project, it should be at about the same as the specific file. On the other hand, if the code is easy to understand and does not have any complex code, then it shouldn't become a problem. \\\\
-The methods/class is at 3, when it should be between 4 and 16, while the whole project is at 5.33. Some of the methods should be divided into smaller methods, to spread the different functions of the overall code. It will be easier to understand the code, then have everything in one method.\\\\
-The average statements/method is why we should refactor the code into more methods, because then the average statements/method is lower. At the moment it is at about 12.33, while the project is at 10.38, and we would like to have it between 6 and 12. \\\\
-The max complexity on the whole project is at 12, which is pretty high, and on our specific file the max complexity is 8, which is also high. We should refactor the code, so that the complexity is under 8, hopefully at 4. \\\\
+
+We decided to check the metrict of minesweeper.java file. Here we can see that the average complexity is at about 3.67, while the whole project is at 3.88. We can conclude from this that they are at the same point on the metric scale, but it is still a little high. What we would like to have is at about 2 on the scale. 
+
+Average depth is the same on both the whole project and in the specified file. The depth is too high and we should refactor it so that it goes down to about 1-2.2. 
+
+Max depth is at about 7, which we find is too high and we want refactor it to about 2-4, it is the same for the whole project. If the max depth starts to be higher than 4, then the complexity of the program goes up, and that becomes a problem when you want to debug or add more functionality to the code. 
+
+The whole project has 4\% comments in total from all the lines, while minesweeper.java is at about 15\%. This is ideal for the specific file, but not with the whole project, it should be at about the same as the specific file. On the other hand, if the code is easy to understand and does not have any complex code, then it shouldn't become a problem. 
+
+The methods/class is at 3, when it should be between 4 and 16, while the whole project is at 5.33. Some of the methods should be divided into smaller methods, to spread the different functions of the overall code. It will be easier to understand the code, then have everything in one method.
+
+The average statements/method is why we should refactor the code into more methods, because then the average statements/method is lower. At the moment it is at about 12.33, while the project is at 10.38, and we would like to have it between 6 and 12. 
+
+The max complexity on the whole project is at 12, which is pretty high, and on our specific file the max complexity is 8, which is also high. We should refactor the code, so that the complexity is under 8, hopefully at 4. 
+
 
 \begin{itemize}
 \item Would you refactor (re-write) any of the methods you have in this file?
