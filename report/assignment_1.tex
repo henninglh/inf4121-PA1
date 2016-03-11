@@ -2,7 +2,9 @@
 \usepackage[utf8]{inputenc}           %% ... or latin1 or applemac
 \usepackage[T1]{fontenc,url}
 \urlstyle{sf}
-\usepackage{tikz,babel,textcomp,csquotes,pgf-umlsd,varioref,graphicx}
+\usepackage{tikz,babel,textcomp,csquotes,pgf-umlsd,varioref,graphicx, float}
+\usepackage{array}
+\usepackage[font={small,it,sf}]{caption}
 \usetikzlibrary{arrows, shadows}
 \title{Project 1}        %% ... or whatever
          %% ... if any
@@ -16,41 +18,47 @@
 \subsection{Brief description}
 This program is a simulation of the popular game Minesweeper. In this version of
 Minesweeper, the player is presented with a map of coordinates with
-questionmarks. Under each questionmark, there is either a number representing
+question marks. Under each question mark, there is either a number representing
 how many mines that are in the vicinity of this particular point on the map, or,
 a mine. The player is prompted for a set of coordinates, which should correlate
-to a questionmark on the map that the player does not think has a mine beneath
-it. The game goes on for as long as the player does not hit a questionmark with
+to a question mark on the map that the player does not think has a mine beneath
+it. The game goes on for as long as the player does not hit a question mark with
 a mine beneath. The game ends when the player has identified all of the
-questionmarks without a mine, or if the player hits a questionmark with a mine.
+question marks without a mine, or if the player hits a question mark with a mine.
 \subsection{Analysis}
-\subsubsection{Defects}
-This program consists of three files.
 
-\begin{itemize}
-    \item Minesweeper.java - The main class of this program. Calls on the two
-        other parts, MineField and Ranking.
-    \item MineField.java - Represents the map of the minefield
-    \item Ranking.java - Handles the highscores of the players playing this game
-\end{itemize}
-\subsubsection{Minesweeper.java}
-This main class on the program has the responsibility for the control flow of
-the program. When should the minefield be called to make a judgement about
-whether the game is still going or ended? When should the ranking be upon to
-calculate the score of the player and show the highscore? It taks input from the
-terminal and compares it to certain keywords. If the input from the player does
-not match the input criteria, the game just prompts for new input.
+\begin{table}[H]
+    \centering
+    \caption{Decision table}
+    \begin{tabular}{| m{1in} |  m{2in}  | m{3in} |}
+        \hline
+        \textbf{Program status} & \textbf{User action} & 
+        \textbf{Program handling} \\ \hline
 
-The testable parts in this class consist of handling the input from the user and
-that the right action is taken accordingly. For example, if the user gives "top"
-as input to the program, the ranking class should be called to show the ranking
-of the players. And if restart is called, you would expect the program to
-restart your session.
+        Program not running & Starting the program & Show the minefield and ask
+        the user for an action \\ \hline
 
-\subsubsection{MineField.java}
-The MineField class contains information about the current coordin
+        Program running & Giving the program input to a coordinate without a
+        mine & Show the field with a number representing adjacent mines \\
+        \hline
 
-\subsubsection{Ranking.java}
+        Program running & Giving the program input to a coordinate with a mine &
+        End the game, show the spot where the user hit a mine, the rest of the
+        mines and prompt the user for a name to be used in the high score list
+        \\ \hline
+
+        Program running & Giving the program input to the text command "restart"
+        & Prompt the user for a high score name and restart the game the game
+        \\\hline
+
+        Program running & Giving the program input to the text command "top" &
+        Display the high score list \\\hline
+
+        Program running & Giving the program input to the text command "exit" &
+        Prompt the user for a high score name, print the high score and exit \\
+        \hline
+    \end{tabular}
+\end{table}
 
 \subsection{Non-functional tests}
 Non-functional tests should always be tested. Though, this code looks like it
@@ -58,8 +66,8 @@ was submitted in some introduction course in Java programming. If we look on
 this as a mandatory assignment in such a course, it should run on every machine
 at UiO installed with Java. If this were to be a huge game developed by a real
 company with the goal of making a multiplayer minesweeper with a regional
-highscore for each country and so on. The amount of non-functional requirements
-will increase. 
+high score for each country and so on. The amount of non-functional requirements
+would increase. 
 
 We have decided to measure the non-functional requirements to meet what we can
 extract from the Minesweeper game on Windows 10.
@@ -81,7 +89,7 @@ experience with the Minesweeper game.
 
 \subsubsection{Efficiency}
 The program operates instantaneously both when it comes to asking for input and
-calculating the highscore. Also, the program as a whole does not utilize
+calculating the high score. Also, the program as a whole does not utilize
 anything more than it needs to.
 
 \subsubsection{Maintainability} % A bit functional??

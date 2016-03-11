@@ -88,7 +88,9 @@ acs-*.bib
 *.brf
 
 # IDE
-*.idea
+.idea
+**/*.idea
+.smproj
 
 # knitr
 *-concordance.tex
