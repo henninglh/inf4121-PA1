@@ -16,6 +16,7 @@
 \usepackage{array}
 \usepackage[font={small,it,sf}]{caption}
 \usepackage{longtable}
+\usepackage{wrapfig}
 \usetikzlibrary{arrows, shadows}
 \title{Project 1}        %% ... or whatever
          %% ... if any
@@ -194,7 +195,14 @@ We used SourceMonitor to check which file was the biggest in our project by the 
        \hline
 \end{longtable}
 \subsection{Metrics at file level}
-\includegraphics[height=8cm]{kiviat_diagram_minesweeper}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\vspace{-8ex}
+	\begin{center}
+		\includegraphics[width=0.48\textwidth]{kiviat_diagram_minesweeper}
+	\end{center}
+	\vspace{-20ex}
+\end{wrapfigure}
 
 We decided to check the metrict of minesweeper.java file. Here we can see that the average complexity is at about 3.67, while the whole project is at 3.88. We can conclude from this that they are at the same point on the metric scale, but it is still a little high. What we would like to have is at about 2 on the scale. 
 
@@ -210,10 +218,10 @@ The average statements/method is why we should refactor the code into more metho
 
 The max complexity on the whole project is at 12, which is pretty high, and on our specific file the max complexity is 8, which is also high. We should refactor the code, so that the complexity is under 8, hopefully at 4. 
 
-
-\begin{itemize}
-\item Would you refactor (re-write) any of the methods you have in this file?
-\end{itemize}
+The method gameContinue() is a very clear candidate for refactoring. It contains
+unnecessary indentations, and according to the kivati measurements average depth
+is an issue in the file. It also has a lot of code with high depth, which could
+be moved to helper methods to achieve lower average depth for the file.
 
 \section{Requirement 3 - Code improvement}
 \subsection{Identification of metrics}
