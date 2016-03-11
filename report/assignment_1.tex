@@ -1,6 +1,12 @@
 \documentclass[UKenglish]{article}  %% ... or USenglish or norsk or nynorsk
 \usepackage[utf8]{inputenc}           %% ... or latin1 or applemac
 \usepackage[T1]{fontenc,url}
+
+\usepackage[a4paper]{geometry}
+\usepackage{listings}
+\setlength{\parskip}{1em}
+\setlength{\parindent}{0em}
+
 \urlstyle{sf}
 \usepackage{tikz,babel,textcomp,csquotes,pgf-umlsd,varioref,graphicx}
 \usetikzlibrary{arrows, shadows}
@@ -132,10 +138,77 @@ How many statements on each block depth
 \item Would you refactor (re-write) any of the methods you have in this file?
 \end{itemize}
 \section{Requirement 3 - Code improvement}
-
 \subsection{Identification of metrics}
+For the file Minesweeper.java the two metrics that are outside of ... are 
+'Method/class' and 'Avg. Depth'. These two metrics are pretty good correlation.
+By moving code in nested if-statements or that in some way have a high depth 
+into methods, this will give less 'Avg. depth' and more Methods per Class. 
+But this also correlates to 'Avg.Complexity' and 'Avg. Statements per method'.
+By creating a lot of methods that does only a small amount, meaning they have
+low complexity and low number of statements, these two metrics would be lowered,
+
+The code is not really documented either, but includes code disabled by being
+commented out. This metrics looks fine, but after removing the disabled code,
+no comments remain.
+
+\subsection{Changes: Minesweeper.java}
+First of the file Minesweeper.java has a lot of unnecessary indentations, which
+give higher average depth for no use. For example this part:
+
+\lstinputlisting[language=Java]{code_examples/indent.java}
+
+Here we have two completely redundant indentations. Both 
+'rank.recordName(result) and 'return true;', have no reason to be indented, and 
+would yield the same result by being at the same depth as the print-line. 
+
+A second code bit for improvement is the 'gameContinue()' method. This part does
+a lot of work on depth four, and much of the work would be natural to insert
+into sub-methods, granting cleaner code and more in-line with the kiviat
+metrics. I chose to create a separate method for checking input, called from
+gameContinue(), in addition all game action calls on methods to do the work,
+instead of doing the work at the level four depth. 
+
+To avoid lowering the 'Statements per method' and avg. Complexity, I've
+combined methods for similar functions. The 'restart', 'exit' in addition to
+trigger for game lost and game won does more or less the same, so it's clearly a
+good practice to gather these code executions into one method like this: 
+
+\lstinputlisting[language=Java]{code_examples/endRound.java}
+
+I also changed some of the logic in the code, making it easier to split code
+into methods. gameContinue() is no longer a boolean, but an int and return codes
+based on the reason for game end or game game status. The 'gameContiue()' method
+will return the code from checkInput unless the code is GAME\_CONTINUE.
+
+\lstinputlisting[language=Java]{code_examples/game_codes.java}
+
+Lastly inserting simple documentation for every method will suffice for keeping
+the '\% comments' inside recommended values.
+
+
 
 \subsection{Results from changes}
+\begin{figure}
+	\caption{Kiviat graph of Minesweeper.java before changes}
+	\includegraphics[height=8cm]{kiviat_minesweeper_before}
+	\label{minesweeper_before}
+\end{figure}
+
+\begin{figure}
+	\caption{Kiviat graph of Minesweeper.java after changes}
+	\includegraphics[height=8cm]{kiviat_minesweeper_after}
+	\label{minesweeper_after}
+\end{figure}
+
+Figure \ref{minesweeper_after} Shows that the kiviat metrics are all inside 
+recommended values. The intention was as mentioned to up Methods per class, and decrease
+the average depth, while keeping the rest inside recommended metrics. All
+metrics have been altered by the changed, but by the though process of the
+improvement all metric are inside recommended values. The most notable change
+from figure \ref{minesweeper_before} is the max depth, which is plainly is the
+removal of the redundant indentations. Also the avg complexity and avg 
+statements.
+per method has been lowered in affect to the introduced 'helper' methods. 
 
 \subsection{Final remarks}
 
