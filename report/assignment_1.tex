@@ -208,7 +208,7 @@ By moving code in nested if-statements or that in some way have a high depth
 into methods, this will give less 'Avg. depth' and more Methods per Class. 
 But this also correlates to 'Avg.Complexity' and 'Avg. Statements per method'.
 By creating a lot of methods that does only a small amount, meaning they have
-low complexity and low number of statements, these two metrics would be lowered,
+low complexity and low number of statements, these two metrics would be lowered.
 
 The code is not really documented either, but includes code disabled by being
 commented out. This metrics looks fine, but after removing the disabled code,
@@ -263,9 +263,9 @@ the '\% comments' inside recommended values.
 \end{figure}
 
 Figure \ref{minesweeper_after} Shows that the kiviat metrics are all inside 
-recommended values. The intention was as mentioned to up Methods per class, and decrease
-the average depth, while keeping the rest inside recommended metrics. All
-metrics have been altered by the changed, but by the though process of the
+recommended values. The intention was as mentioned to up Methods per class, and
+decreasethe average depth, while keeping the rest inside recommended metrics. 
+All metrics have been altered by the changed, but by the though process of the
 improvement all metric are inside recommended values. The most notable change
 from figure \ref{minesweeper_before} is the max depth, which is plainly is the
 removal of the redundant indentations. Also the avg complexity and avg 
@@ -292,5 +292,5 @@ depend on each other in some way, and by decreasing the depth by creating more
 helper methods, the complexity and average complexity decreased naturally. You
 could not just improve one metric without thinking about the other. But with
 some planning and given there are not too many metrics to keep in mind, the
-improvement went rather smoothly. 
+improvement went rather smoothly.
 \end{document}
