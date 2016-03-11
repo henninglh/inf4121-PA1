@@ -6,27 +6,29 @@ class MineField{
 	private boolean boom;
 	private final int rowMax = 5;
 	private final int colMax = 10;
-	
+
 	MineField(){
-		
+
 		mines=new boolean[rowMax][colMax];
 		visible=new boolean[rowMax][colMax];
 		boom=false;
-		
+
+		initMap();
+
 		int counter2=15;
 		int randomRow,randomCol;
 		Random RGenerator=new Random();
-		
+
 		while(counter2>0){
-			
+
 			randomRow=Math.abs(RGenerator.nextInt()%rowMax);
 			randomCol=Math.abs(RGenerator.nextInt()%colMax);
-			
+
 			if(trymove(randomRow,randomCol)){
 				counter2--;
 			}
 		}
-	}	
+	}
 	private boolean trymove(int randomRow, int randomCol) {
 		if(mines[randomRow][randomCol]){
 			return false;
@@ -46,8 +48,8 @@ class MineField{
 		}
 		boom=true;
 		show();
-		
-		
+
+
 	}
 
 
@@ -124,7 +126,7 @@ class MineField{
 
 
 	private boolean legalMoveValue(int row, int col) {
-		
+
 		if(visible[row][col]){
 			System.out.println("You stepped in allready revealed area!");
 			return false;
@@ -132,12 +134,12 @@ class MineField{
 		else{
 			visible[row][col]=true;
 		}
-		
+
 		if(mines[row][col]){
 			boom();
 			return false;
 		}
-		
+
 		return true;
 	}
 	public void show() {
@@ -147,7 +149,7 @@ class MineField{
 			System.out.print(row+" |");
 			for(int col=0;col<colMax;col++){
 				System.out.print(" "+drawChar(row,col));
-				
+
 			}
 			System.out.println(" |");
 		}
